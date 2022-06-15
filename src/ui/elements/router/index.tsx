@@ -2,6 +2,10 @@ import React from 'react';
 
 import 'react-native-gesture-handler';
 
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
+
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -43,7 +47,7 @@ const bottomTabConfig = {
 	headerShown: false,
 };
 
-const stackConfig = {headerShown: false};
+const stackConfigOptions = {headerShown: false};
 
 function StackNavigator({
 	children,
@@ -54,7 +58,7 @@ function StackNavigator({
 }) {
 	return (
 		<Stack.Navigator
-			screenOptions={stackConfig}
+			screenOptions={stackConfigOptions}
 			initialRouteName={initialRouteName}>
 			{children}
 		</Stack.Navigator>
@@ -114,26 +118,54 @@ export default function () {
 		<NavigationContainer>
 			<Tab.Navigator
 				initialRouteName={routeNames.pokedex.routeTabName}
-				screenOptions={bottomTabConfig}>
+				screenOptions={{
+					...bottomTabConfig,
+				}}>
 				<Tab.Screen
 					name={routeNames.favorites.routeTabName}
 					component={FavoritesStack}
 					options={{
-						tabBarLabel: routeNames.favorites.title,
+						tabBarIcon: ({focused, color, size}) => {
+							const iconsColor = focused ? 'black' : 'silver';
+							return (
+								<MaterialIcons
+									name="favorite-border"
+									size={20}
+									color={iconsColor}
+								/>
+							);
+						},
+						tabBarShowLabel: false,
 					}}
 				/>
 				<Tab.Screen
 					name={routeNames.pokedex.routeTabName}
 					component={PokedexStack}
 					options={{
-						tabBarLabel: routeNames.pokedex.title,
+						tabBarIcon: ({focused, color, size}) => {
+							const iconsColor = focused ? 'black' : 'silver';
+							return (
+								<MaterialCommunityIcons
+									name="pokeball"
+									size={32}
+									color={iconsColor}
+								/>
+							);
+						},
+						tabBarShowLabel: false,
 					}}
 				/>
 				<Tab.Screen
 					name={routeNames.settings.routeTabName}
 					component={SettingsStack}
 					options={{
-						tabBarLabel: routeNames.settings.title,
+						tabBarIcon: ({focused, color, size}) => {
+							const iconsColor = focused ? 'black' : 'silver';
+							return (
+								<SimpleLineIcons name="settings" size={20} color={iconsColor} />
+							);
+						},
+						tabBarShowLabel: false,
 					}}
 				/>
 			</Tab.Navigator>
