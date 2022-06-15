@@ -6,7 +6,7 @@ import {Text, View} from 'react-native';
 const Settings: React.FC = () => {
 	return (
 		<View>
-			<Text>Hi, pokedex!</Text>
+			<Text>Settings</Text>
 		</View>
 	);
 };

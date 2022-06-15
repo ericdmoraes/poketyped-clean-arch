@@ -3,30 +3,109 @@ import React from 'react';
 import 'react-native-gesture-handler';
 
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import HomeScreen from '../pages/home';
+import PokedexScreen from '../pages/pokedex';
+import PokemonDetails from '../pages/pokedex/pokemonDetails';
+
 import SettingsScreen from '../pages/settings';
-import ListScreen from '../pages/list';
+import FavoritesScreen from '../pages/favorites';
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-function HomeStack() {
+const routeNames = {
+	pokedex: {
+		title: 'Pokédex',
+		routeStackName: 'pokedexStack',
+		routeTabName: 'pokedexTab',
+	},
+	pokemonDetails: {
+		title: 'Pokémon Details',
+		routeStackName: 'pokemonDetailsStack',
+		routeTabName: 'pokemonDetailsTab',
+	},
+	settings: {
+		title: 'Settings',
+		routeStackName: 'settingsStack',
+		routeTabName: 'settingsTab',
+	},
+	favorites: {
+		title: 'Favorites',
+		routeStackName: 'favoritesStack',
+		routeTabName: 'favoritesTab',
+	},
+};
+
+const bottomTabConfig = {
+	tabBarActiveTintColor: '#000',
+	headerShown: false,
+};
+
+const stackConfig = {headerShown: false};
+
+function StackNavigator({
+	children,
+	initialRouteName,
+}: {
+	children: React.ReactElement;
+	initialRouteName: string;
+}) {
 	return (
-		<Stack.Navigator initialRouteName="Home">
-			<Stack.Screen name="Pokédex" component={HomeScreen} />
-			<Stack.Screen name="List" component={ListScreen} />
+		<Stack.Navigator
+			screenOptions={stackConfig}
+			initialRouteName={initialRouteName}>
+			{children}
 		</Stack.Navigator>
+	);
+}
+
+function PokedexStack() {
+	return (
+		<StackNavigator
+			initialRouteName={routeNames.pokedex.routeStackName}
+			children={
+				<>
+					<Stack.Screen
+						name={routeNames.pokedex.routeStackName}
+						component={PokedexScreen}
+					/>
+					<Stack.Screen
+						name={routeNames.pokemonDetails.routeStackName}
+						component={PokemonDetails}
+					/>
+				</>
+			}
+		/>
 	);
 }
 
 function SettingsStack() {
 	return (
-		<Stack.Navigator initialRouteName="Settings">
-			<Stack.Screen name="Settings" component={SettingsScreen} />
-		</Stack.Navigator>
+		<StackNavigator
+			initialRouteName={routeNames.settings.routeStackName}
+			children={
+				<Stack.Screen
+					name={routeNames.settings.routeStackName}
+					component={SettingsScreen}
+				/>
+			}
+		/>
+	);
+}
+
+function FavoritesStack() {
+	return (
+		<StackNavigator
+			initialRouteName={routeNames.favorites.routeStackName}
+			children={
+				<Stack.Screen
+					name={routeNames.favorites.routeStackName}
+					component={FavoritesScreen}
+				/>
+			}
+		/>
 	);
 }
 
@@ -34,22 +113,27 @@ export default function () {
 	return (
 		<NavigationContainer>
 			<Tab.Navigator
-				screenOptions={{
-					tabBarActiveTintColor: '#000',
-					headerShown: false,
-				}}>
+				initialRouteName={routeNames.pokedex.routeTabName}
+				screenOptions={bottomTabConfig}>
 				<Tab.Screen
-					name="HomeStack"
-					component={HomeStack}
+					name={routeNames.favorites.routeTabName}
+					component={FavoritesStack}
 					options={{
-						tabBarLabel: 'Home',
+						tabBarLabel: routeNames.favorites.title,
 					}}
 				/>
 				<Tab.Screen
-					name="SettingsStack"
+					name={routeNames.pokedex.routeTabName}
+					component={PokedexStack}
+					options={{
+						tabBarLabel: routeNames.pokedex.title,
+					}}
+				/>
+				<Tab.Screen
+					name={routeNames.settings.routeTabName}
 					component={SettingsStack}
 					options={{
-						tabBarLabel: 'Settings',
+						tabBarLabel: routeNames.settings.title,
 					}}
 				/>
 			</Tab.Navigator>

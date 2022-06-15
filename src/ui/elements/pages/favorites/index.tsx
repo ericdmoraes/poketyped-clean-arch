@@ -3,12 +3,12 @@ import {Text, View} from 'react-native';
 
 // import { Container } from './styles';
 
-const Home: React.FC = () => {
+const Favorites: React.FC = () => {
 	return (
 		<View>
-			<Text>Hi, pokedex!</Text>
+			<Text>Favorites</Text>
 		</View>
 	);
 };
 
-export default Home;
+export default Favorites;

@@ -3,12 +3,13 @@ import {Text, View} from 'react-native';
 
 // import { Container } from './styles';
 
-const List: React.FC = () => {
+const Pokedex: React.FC = (props: any) => {
 	return (
 		<View>
-			<Text>Hi, pokedex!</Text>
+			{console.log(props)}
+			<Text>Pokdex screen!</Text>
 		</View>
 	);
 };
 
-export default List;
+export default Pokedex;
