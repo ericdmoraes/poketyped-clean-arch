@@ -1,13 +1,12 @@
 import React from 'react';
-import {Text, View} from 'react-native';
 
-// import { Container } from './styles';
+import {Label, Container} from './styles';
 
 const Pokedex = () => {
   return (
-    <View>
-      <Text>Pokdex screen!</Text>
-    </View>
+    <Container>
+      <Label>Pokedex</Label>
+    </Container>
   );
 };
 
