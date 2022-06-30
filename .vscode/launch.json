@@ -1,0 +1,18 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Android",
+      "request": "launch",
+      "type": "reactnative",
+      "cwd": "${workspaceFolder}",
+      "platform": "android"
+    },
+    {
+      "type": "pwa-chrome",
+      "name": "http://localhost:8081/debugger-ui/",
+      "request": "launch",
+      "url": "http://localhost:8081/debugger-ui/"
+    }
+  ]
+}

@@ -13,6 +13,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {FavoritesStack} from './Stacks/favorites';
 import {SettingsStack} from './Stacks/settings';
 import {PokedexStack} from './Stacks/pokedex';
+import {Text, View} from 'react-native';
 
 export const Stack = createNativeStackNavigator();
 
@@ -85,6 +86,27 @@ export default function () {
           options={{
             tabBarIcon: SetUpPokedexTabIcon,
             tabBarShowLabel: false,
+            headerShown: true,
+            headerTitle: '',
+            headerBackground: () => (
+              <View style={{flex: 1, backgroundColor: 'silver'}} />
+            ),
+            headerRight: () => {
+              return (
+                <View
+                  style={{
+                    flex: 1,
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    backgroundColor: 'silver',
+                  }}>
+                  <Text>1</Text>
+                  <Text>2</Text>
+                  <Text>3</Text>
+                </View>
+              );
+            },
           }}
         />
         <Tab.Screen
