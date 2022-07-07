@@ -1,5 +1,5 @@
 import React from 'react';
-import {Stack} from '../';
+import {Stack} from '..';
 
 const stackConfigOptions = {headerShown: false};
 

@@ -1,5 +1,7 @@
-import React, {ReactChild, useEffect, useState} from 'react';
-import {Text, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {Text} from 'react-native';
+import {Pokemon} from '../../../../domain/types/Pokemons';
+import {getPokemonList} from '../../../presenters/PokemonsPresenter';
 
 import {
   Container,
@@ -12,21 +14,20 @@ import {
 } from './styles';
 
 const Pokedex = () => {
-  const [pokemons, setPokemons] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+  // const [pokemonSearch, setPokemonSearch] = useState('');
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const fetchData = async () => {
-      getPokemonByName();
-    };
-
-    fetchData();
+    getPokemonList(onSuccess, onError);
   }, []);
 
-  const getPokemonByName = async (name: String = '') => {
-    const data = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
-    const {results} = await data.json();
-    setPokemons(results);
+  const onError = () => {
+    console.log('Error on view');
+  };
+
+  const onSuccess = (pokemonsResponse: Pokemon[]) => {
+    setPokemons(pokemonsResponse);
     setLoading(false);
   };
 
@@ -45,8 +46,9 @@ const Pokedex = () => {
           Pokédex.
         </SearchDescriptionLabel>
         <SearchInput
-          placeholder={`Qual o nome do pokemon?`}
-          onEndEditing={() => console.log('asdasdas')}
+          placeholder="Qual o pokemon?!"
+          onChangeText={text => console.log(text)}
+          onEndEditing={() => console.log('search teste')}
         />
       </SearchContainer>
       {loading ? (
