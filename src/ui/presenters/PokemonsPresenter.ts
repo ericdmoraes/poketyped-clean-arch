@@ -12,3 +12,11 @@ export const getPokemonList = async (
 ) => {
   await pokemonsInteractor.getPokemonsList(onSuccess, onError);
 };
+
+export const getPokemonByName = async (
+  name: string,
+  onSuccess: Function,
+  onError: Function,
+) => {
+  await pokemonsInteractor.getPokemonByName(name, onSuccess, onError);
+};

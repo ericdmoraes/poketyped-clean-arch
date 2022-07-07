@@ -7,6 +7,20 @@ import {IPokemonsService} from '../interfaces/services/IPokemonService';
 export default class PokemonsInteractor implements IPokemonsInteractor {
   @inject(TYPES.IPokemonService) private pokemonsService!: IPokemonsService;
 
+  public async getPokemonByName(
+    name: string,
+    onSuccess: Function,
+    onError: Function,
+  ): Promise<void> {
+    try {
+      console.log('interactor =>', name);
+      const pokemon = await this.pokemonsService.getPokemonByName(name);
+      onSuccess(pokemon);
+    } catch (error) {
+      onError(error);
+    }
+  }
+
   public async getPokemonsList(
     onSuccess: Function,
     onError: Function,
