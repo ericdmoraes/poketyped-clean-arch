@@ -1,10 +1,7 @@
 import {inject, injectable} from 'inversify';
 import {TYPES} from '../../di/types';
-import {IPokemonsService} from '../services/IPokemonService';
-
-export interface IPokemonsInteractor {
-  getPokemonsList(onSuccess: Function, onError: Function): Promise<void>;
-}
+import {IPokemonsInteractor} from '../interfaces/interactors/IPokemonsInteractor';
+import {IPokemonsService} from '../interfaces/services/IPokemonService';
 
 @injectable()
 export default class PokemonsInteractor implements IPokemonsInteractor {

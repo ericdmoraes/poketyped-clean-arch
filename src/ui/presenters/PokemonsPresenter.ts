@@ -1,6 +1,6 @@
 import {myContainer} from '../../di/inversify.config';
 import {TYPES} from '../../di/types';
-import {IPokemonsInteractor} from '../../domain/interactors/PokemonsInteractor';
+import {IPokemonsInteractor} from '../../domain/interfaces/interactors/IPokemonsInteractor';
 
 const pokemonsInteractor = myContainer.get<IPokemonsInteractor>(
   TYPES.IPokemonsInteractor,

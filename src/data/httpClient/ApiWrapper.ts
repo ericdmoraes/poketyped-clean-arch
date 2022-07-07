@@ -1,11 +1,8 @@
 import {AxiosInstance} from 'axios';
 import {injectable} from 'inversify';
+import {IApiClient} from '../../domain/interfaces/services/IApiClient';
 
 import axiosApi from './Api';
-
-export interface IApiClient {
-  get<TResponse>(path: string): Promise<TResponse>;
-}
 
 @injectable()
 export default class ApiWrapper implements IApiClient {
